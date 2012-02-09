@@ -16,16 +16,23 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  page.content  is the entire content of the page as a string.
 end
 
+Then /I should see all of the movies/ do
+  Movie.all.each do |movie|
+    step %Q(I should see "#{movie.title}")
+  end
+end 
+
+Then /I should not see any of the movies/ do
+  Movie.all.each do |movie|
+    step %Q(I should not see "#{movie.title}")
+  end 
+end
+
 # Make it easier to express checking or unchecking several boxes at once
 #  "When I uncheck the following ratings: PG, G, R"
 #  "When I check the following ratings: G"
 
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
-  # HINT: use String#split to split up the rating_list, then
-  #   iterate over the ratings and reuse the "When I check..." or
-  #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
-  
-  #When  %Q(I check "ratings_R")
   rating_list.gsub(/"/,'').split(',').each do |field|
   
     if(uncheck)
