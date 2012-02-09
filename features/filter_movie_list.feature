@@ -48,7 +48,7 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   And I should not see "Chicken Run"
 
 Scenario: no checkboxes selected
-  # see assignment
+
 
 Scenario: all checkboxes selected
   # see assignment
